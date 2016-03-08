@@ -28,7 +28,7 @@ description:
 
 我建议你查阅[官方文档](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)，文档中有很多有用的细节，介绍了推送通知的工作原理。
 
-在应用可以收到推送通知之前有几步配置工作，这些步骤总体上可以被分为两步：编程方面的准备和创建各种证书、配置文件（provisioning profile）等。编程部分很容易，它只是几段必须添加到项目中的标准代码。容易引起混淆的是第二步，这些操作需要在不同的地方被执行，比如 Mac 上的钥匙串访问程序，Xcode 项目和 *Apple Developer Member Center* 网站。
+在应用可以收到推送通知之前有几步配置工作，这些步骤总体上可以被分为两步：编程方面的准备和创建各种证书、描述文件（provisioning profile）等。编程部分很容易，它只是几段必须添加到项目中的标准代码。容易引起混淆的是第二步，这些操作需要在不同的地方被执行，比如 Mac 上的钥匙串访问程序，Xcode 项目和 *Apple Developer Member Center* 网站。
 
 除此以外，远程通知可以被分为两种，一种是 **沙盒** 通知，这种通知可以在开发阶段使用，因此它可以用于调试。另一种是 **实时** 通知，这意味着它只能在产品发布阶段使用。如果你成功的在应用中接收到了沙盒通知，并且正确的执行了此前提到的各种操作，那么就可以放心的认为实时推送通知也可以正常使用了。毫无疑问，Apple 为发送沙盒通知提供了专门的测试服务器，这并不是由生产环境下的 APN 服务器负责的。
 
@@ -74,7 +74,7 @@ description:
 
 # 步骤二： 创建一个 App ID
 
-我们的下一步操作是在苹果开发者网站上创建一个新的 App ID。这个 App ID 是将你的应用和其他应用区分开来的唯一标志，它可以帮助 APN 服务器正确的规划发送通知的路径。实际上，你将会看到我们会把这个 App ID 和其它几样东西关联起来：一个用于推送通知的新证书，一个允许我们在测试设备上运行应用的配置文件。
+我们的下一步操作是在苹果开发者网站上创建一个新的 App ID。这个 App ID 是将你的应用和其他应用区分开来的唯一标志，它可以帮助 APN 服务器正确的规划发送通知的路径。实际上，你将会看到我们会把这个 App ID 和其它几样东西关联起来：一个用于推送通知的新证书，一个允许我们在测试设备上运行应用的描述文件。
 
 先完成最重要的事，我们前往 [Apple Developer Member Center](https://developer.apple.com/membercenter/)，输入用户名密码后登陆。然后点击 **Certificates, Identifiers & Profiles** 链接，于是你会跳转到合适的页面。
 
@@ -179,23 +179,23 @@ description:
 
 你可以验证是否成功的注册了设备，只要再次点击 **Devices** 目录下的 **All** 选项，然后逐条查找你刚刚输入的设备名即可。
 
-# 步骤五：创建开发环境的配置文件
+# 步骤五：创建开发环境的描述文件
 
-在苹果开发者网站上的最后一个任务是为开发环境创建一个配置文件。它将会用于为应用提供代码签名。注意，在把应用上传到 iTunes Connect 并使用 TestFlight 或上架 App Store 之前，你需要创建发布环境的配置文件（Distribution provisioning profile）。它的使用方法和你将要学到的开发环境的配置文件的使用方法类似。
+在苹果开发者网站上的最后一个任务是为开发环境创建一个描述文件。它将会用于为应用提供代码签名。注意，在把应用上传到 iTunes Connect 并使用 TestFlight 或上架 App Store 之前，你需要创建发布环境的描述文件（Distribution provisioning profile）。它的使用方法和你将要学到的开发环境的描述文件的使用方法类似。
 
-在苹果开发者网页上，点击 **Provisioning Profiles** 目录下的 **Development** 链接，主窗口中会显示出所有已存在的配置文件。稍后，我们新建的配置文件也会添加到这里。
+在苹果开发者网页上，点击 **Provisioning Profiles** 目录下的 **Development** 链接，主窗口中会显示出所有已存在的描述文件。稍后，我们新建的描述文件也会添加到这里。
 
-你可以通过点击右上角的加号（+）按钮创建一个新的配置文件。在新打开的表格中，点击选择 **iOS App Development**选项（第一个选项）。注意，如果你创建的是用于发布应用的 provisioning profile，就应该选择底下第二个区域中的选项（很有可能是 App Store）。
+你可以通过点击右上角的加号（+）按钮创建一个新的描述文件。在新打开的表格中，点击选择 **iOS App Development**选项（第一个选项）。注意，如果你创建的是用于发布应用的描述文件，就应该选择底下第二个区域中的选项（很大可能是 App Store）。
 
 选择了合适的选项后，点击 **Continue** 按钮开始下一步操作。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_21_create_provisioning_1.png)
 
-现在，我们要把这个配置文件与应用对应的 App ID 关联起来。你需要在下拉菜单中查找并选择正确的 App ID。
+现在，我们要把这个描述文件与应用对应的 App ID 关联起来。你需要在下拉菜单中查找并选择正确的 App ID。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_22_create_provisioning_2.png)
 
-接下来，你需要把你的 **iOS Development certificate** 导入到配置文件中（假设你至少有一个证书）。如果像下图所示那样，有多个证书并且不确定该选择哪一个，一种简单的方法是勾选 **Select All** 选项导入所有的证书，这一步就完成了。
+接下来，你需要把你的 **iOS Development certificate** 导入到描述文件中（假设你至少有一个证书）。如果像下图所示那样，有多个证书并且不确定该选择哪一个，一种简单的方法是勾选 **Select All** 选项导入所有的证书，这一步就完成了。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_23_create_provisioning_3.png)
 
@@ -203,11 +203,11 @@ description:
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_24_create_provisioning_4.png)
 
-最后一步是为配置文件文件命名，将它与其他文件区分开来。我把它叫做 **PNDemo Development Profile**，你可以根据自己的喜好随便起名。
+最后一步是为描述文件文件命名，将它与其他文件区分开来。我把它叫做 **PNDemo Development Profile**，你可以根据自己的喜好随便起名。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_25_create_provisioning_5.png)
 
-点击 **Generate** 按钮并等待下一个页面出现。当新的配置文件创建完成后，你就可以下载它了。如下图所示：
+点击 **Generate** 按钮并等待下一个页面出现。当新的描述文件创建完成后，你就可以下载它了。如下图所示：
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_26_download_provisioning.png)
 
@@ -215,7 +215,7 @@ description:
 
 # 步骤六：配置项目
 
-从这一步开始，我们就和苹果开发者网页说再见了。把目光转移到我们的项目上来，这里我们需要完成两个任务：
+从这一步开始，我们就和苹果开发者网站说再见了。把目光转移到我们的项目上来，这里我们需要完成两个任务：
 
 1. 首先我们要在项目中开启推送通知功能，这样设备才能接收到通知。虽然这是很基础，很简单的一步，但是相信我，很多开发者都会忘记启用推送通知功能。
 
@@ -231,13 +231,13 @@ description:
 
 正如截图中的信息所示，一旦启用推送通知功能，在 *Info.plist* 文件中就会自动添加相应的权限。
 
-现在打开 **Build Settings** 标签，找到 **Code Signing** 这一节。展开 **Provisioning Profile** 字段，然后点击 **Debug** 这一行中的 **Automatic**。在展开的列表中有你的开发者账户下所有的 provisioning profile，你需要选择你上一步下载并安装的那一个。
+现在打开 **Build Settings** 标签，找到 **Code Signing** 这一节。展开 **Provisioning Profile** 字段，然后点击 **Debug** 这一行中的 **Automatic**。在展开的列表中有你的开发者账户下所有的描述文件，你需要选择你上一步下载并安装的那一个。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_30_select_provisioning_profile.png)
 
-因为我们没有创建发布应用时用到的 provisioning profile，所以我们无需设置 **Release** 这一行中的值。不过当你在苹果开发者网站上创建并下载发布应用时用到的配置文件后，你需要采取与这里相同的操作。
+因为我们没有创建发布应用时用到的描述文件，所以我们无需设置 **Release** 这一行中的值。不过当你在苹果开发者网站上创建并下载发布应用时用到的描述文件后，你需要采取与这里相同的操作。
 
-你可以在配置文件字段上面找到 **Code Signing Identity** 字段。如果它没有展开，你可以点击左侧的箭头展开它。这一步的操作和刚才类似，点击 **Debug** 栏中的默认值 **iOS Developer (或 iPhone Developer)**，然后在弹出的列表中选择合适的身份证明。如下图所示：
+你可以在描述文件字段上面找到 **Code Signing Identity** 字段。如果它没有展开，你可以点击左侧的箭头展开它。这一步的操作和刚才类似，点击 **Debug** 栏中的默认值 **iOS Developer (或 iPhone Developer)**，然后在弹出的列表中选择合适的身份证明。如下图所示：
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_31_set_identity.png)
 
@@ -249,13 +249,13 @@ description:
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_33_select_project.png)
 
-找到 **Code Signing** 这一节，重复之前的步骤。首先选择 **Debug** 模式下的 provisioning profile，然后设置好正确的 **Code Signing Identity**。
+找到 **Code Signing** 这一节，重复之前的步骤。首先选择 **Debug** 模式下的描述文件，然后设置好正确的 **Code Signing Identity**。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_34_code_signing_project.png)
 
 # 步骤七：注册推送通知
 
-到目前为止，项目中的配置都结束了，现在我们需要写几行代码了。首先，我们让应用自身向 iOS 系统注册接收推送通知，并指定我们希望接受的通知的类型（比如 *badge*，声音或警告信息）。
+到目前为止，项目中的配置都结束了，现在我们需要写几行代码了。首先，我们让应用自身向 iOS 系统注册接收推送通知，并指定我们希望接受的通知的类型（比如**角标**，声音或警告信息）。
 
 事实上，我们会用到上述所有类型的通知，这也是我们的在这一步的切入点。打开 `AppDelegate.swift` 文件，在 `application(_:didFinishLaunchingWithOptions:)` 方法的 `return true` 前面添加下面两行代码：
 
@@ -289,7 +289,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 
 # 步骤八：代理方法
 
-注册推送通知是很关键的一步，但这只是我们要做的编程工作的一半。另外一些与编程有关的任务是实现一些代理方法，这样你的应用才能在接收到通知时做出正确响应。我们一个一个看这些方法：
+注册推送通知是很关键的一步，但这只是我们要做的编程工作的一半。另外一些与编程有关的任务是实现一些代理方法，这样你的应用才能在接收到通知时做出正确响应。我们一个个看这些方法：
 
 首先，我们要实现 `application(_: didRegisterForRemoteNotificationsWithDeviceToken:)` 方法。它在应用成功注册推送通知后调用。通常情况下，第二个参数至关重要，它包含了每个设备独有的一个 key，我们把这个 key 称为 *device token*。在实际使用中，你需要把 *device token* 发送给服务器。这里的服务器是推送消息的最初发起方，它把 *device token* 和其他必要信息发送给 APN 服务器。这就是为什么 APN 服务器能够知道通知的接收者是哪台设备。
 
@@ -329,11 +329,11 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 
 测试推送通知曾经是一件很麻烦的事，因为这只有一种解决方案。要么从头开始写一个命令行脚本，要么找一份已有的脚本并根据自己的应用和设备进行修改。时至今日，这个方案依然行得通，但在 Mac App Store 上已经出现了一些专门用于测试推送通知的应用。没错，这就是我们将要使用的方案。
 
-使用 Mac 上的应用来测试推送通知的好处在于，它提供了用户界面（UI）给我们填写必要的数据（比如 device token 或推送通知的证书）。而且这些应用隐藏了“无聊”的编程部分，比如连接到 APN 服务器。实际上，在大多数此类应用中，你只需要指定以下三样东西：
+使用 Mac 上的应用来测试推送通知的好处在于，它提供了用户界面（GUI）给我们填写必要的数据（比如 device token 或推送通知的证书）。而且这些应用隐藏了“无聊”的编程部分，比如连接到 APN 服务器。实际上，在大多数此类应用中，你只需要指定以下三样东西：
 
-1. 用于接收测试通知的目标设备的 device token
-2. 推送通知证书的保存路径
-3. 推送通知的载荷（消息，badge 数字和声音）
+1. 用于接收测试通知的目标设备的 device token；
+2. 推送通知证书的保存路径；
+3. 推送通知的载荷（消息、角标数字和声音）。
 
 在这个部分中，我会向大家展示两款应用。不过首先要澄清的是：此举完全不是为了推广这些应用。你即将看到的这两款应用，以及 Mac App Store 上其他同类的应用，在我看来是都是可以简化工作、节省时间的简单的工具。基于以上逻辑，我们继续这篇教程，来看看如何成功的推送第一条通知。
 
@@ -349,7 +349,7 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_37_permissions.png)
 
-在 **Payload** 文本框中，你需要填写推送通知的细节内容。比如你希望接收一条消息，显示 badge 数字并播放默认的声音，你应该这样写：
+在 **Payload** 文本框中，你需要填写推送通知的细节内容。比如你希望接收一条消息，显示角标数字并播放默认的声音，你应该这样写：
 
 ```swift
 {"aps":{"alert":"Hello from AppCoda!","badge":1, "sound": "default"}}
@@ -357,7 +357,7 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 
 若想获取更多有关通知载荷和所有可设置的值的信息，请访问[**官方文档**](https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html#//apple_ref/doc/uid/TP40008194-CH107-SW1)。
 
-在填写正确的 **Certificate** 信息时，你需要点击 **Browse** 按钮，在磁盘中查找开发模式下的推送通知证书（这显然是在 **GateWay** 的值被设置为 **Development** 时的操作）。提醒你一下，这个证书的名字应该是 **aps_development.cer**（除非你修改了文件名）。找到证书并导入到应用中后，你会在控制台中看到一条消息，告诉你 .cer 文件已经被成功的加载了。
+在填写正确的 **Certificate** 信息时，你需要点击 **Browse** 按钮，在磁盘中查找开发模式下的推送通知证书（这显然是在 **Gateway** 的值被设置为 **Development** 时的操作）。提醒你一下，这个证书的名字应该是 **aps_development.cer**（除非你修改了文件名）。找到证书并导入到应用中后，你会在控制台中看到一条消息，告诉你 .cer 文件已经被成功的加载了。
 
 设置完以上内容后，你就已经准备就绪，可以推送通知了，你要做的仅仅是点击 **Push** 按钮。这时你会在应用的控制台中看到推送通知被发送的消息，如果推送失败，控制台中同样会有红色的文字提示。
 
@@ -369,7 +369,7 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/01/t48_39_pn_details_xcode.png)
 
-除此以外，你还可以自己修改 badge 数字，开启或关闭通知的声音。通过这些尝试，你可以确保所有的配置都正确无误。
+除此以外，你还可以自己修改角标数字，开启或关闭通知的声音。通过这些尝试，你可以确保所有的配置都正确无误。
 
 另一个我打算向你展示的应用是一个叫做 *Easy APNs Provider* 的程序，你可以在[这里](https://itunes.apple.com/us/app/easy-apns-provider-push-notification/id989622350?mt=12)找到它。这是一个免费应用，它有一些额外的选项可供设置，因此你可以尝试设置推送通知更加高级的功能（比如额外的数据）。
 
@@ -391,4 +391,4 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 
 # 总结
 
-在这篇教程中，我们经历了很多步骤，执行了许多不同的操作。如果你读到了这里，并且成功的在沙盒模式下推送了通知，那么你完全有理由相信在实际应用中，实时通知推送也会正常工作。你只需要遵循文中列出的操作指南，将它们应用于 Distribution 模式并且补上文中没有处理的部分即可。举个例子吧，你需要编辑你的 App ID 并创建发布应用时用到的 SSL 证书，还需要创建 Distribution 模式下的 provisioning profile，当然还得在项目的 Build Settings 中使用合适的代码签名。无论如何，我都希望本文能够帮助你理清思路，弄清楚配置通知推送的步骤，最终帮助你更快的完成任务。再见！
+在这篇教程中，我们经历了很多步骤，执行了许多不同的操作。如果你读到了这里，并且成功的在沙盒模式下推送了通知，那么你完全有理由相信在实际应用中，实时通知推送也会正常工作。你只需要遵循文中列出的操作指南，将它们应用于 Distribution 模式并且补上文中没有处理的部分即可。举个例子吧，你需要编辑你的 App ID 并创建发布应用时用到的 SSL 证书，还需要创建 Distribution 模式下的描述文件，当然还得在项目的 Build Settings 中使用合适的代码签名。无论如何，我都希望本文能够帮助你理清思路，弄清楚配置通知推送的步骤，最终帮助你更快的完成任务。下回再见！
