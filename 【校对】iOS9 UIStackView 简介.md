@@ -1,6 +1,23 @@
+title: "iOS9 UIStackView 简介"
+date: 
+tags:
+categories: 
+permalink: ios9-uistackview-guide-swift
+keywords: 
+custom_title: 
+description: 
+---
+原文链接=https://www.uraimo.com/2015/09/08/ios9-uistackview-guide-swift/
+作者=Gabriel Theodoropoulos
+原文日期=2015/12/08
+译者=CoderAFI
+校对=Channe
+定稿=
+
+<!--此处开始正文-->
 # iOS9 UIStackView 简介
 
-*示例程序采用 Swift2.0 编写需要 Xcode7 beta 以上版本进行编译，你可以访问 [Github](https://github.com/uraimo/uistackview-sample) 或者下载 [zipped](https://github.com/uraimo/uistackview-sample/archive/master.zip) 源代码*
+**示例程序采用 Swift2.0 编写，需要用 Xcode7 进行编译，可以访问 [Github](https://github.com/uraimo/uistackview-sample) 或者 [zipped](https://github.com/uraimo/uistackview-sample/archive/master.zip) 下载源代码**
 
 ## 概要
 
