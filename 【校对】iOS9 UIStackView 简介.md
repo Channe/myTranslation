@@ -17,15 +17,15 @@ description:
 <!--此处开始正文-->
 # iOS9 UIStackView 简介
 
-**示例程序采用 Swift2.0 编写，需要用 Xcode7 进行编译，可以访问 [Github](https://github.com/uraimo/uistackview-sample) 或者 [zipped](https://github.com/uraimo/uistackview-sample/archive/master.zip) 下载源代码**
+**示例程序采用 Swift2.0 编写，需要用 Xcode7 进行编译，可以访问 [Github](https://github.com/uraimo/uistackview-sample) 或者 [zipped](https://github.com/uraimo/uistackview-sample/archive/master.zip) 下载本文源代码**
 
 ## 概要
 
-iOS9 新加入了一个非常易用的布局控件 UIStackView。它可以将一组 UIView 视图进行垂直或水平方向的排列，并且可以结合 auto-layout 对视图进行布局。
+iOS9 新加入了一个非常易用的布局控件 UIStackView。它可以将一组 UIView 视图进行垂直或水平方向的排列，并且可以结合 Auto Layout 对视图进行布局。
 
 每个 UIStackView 控件都可以在垂直和水平方向上排列展示一组 subviews，并可以根据当前屏幕大小和方向的变化动态调整它的内容，感觉起来就像是一个隐形的容器。实际上 subviews 的位置是根据设置的对齐、间距和大小属性来决定的。
 
-内部的原理是 UIStackView 类帮你管理了 auto-layout 约束。想象一下 UIStackView 其实就是一个基于 auto-layout 的抽象层从而使布局属性的创建简单化。你可以在一个主 UIStackView 中嵌套 UIStackView 从而让视图精确放置到相应的位置。
+内部的原理是 UIStackView 类帮你管理了 Auto Layout 约束。想象一下 UIStackView 其实就是一个基于 Auto Layout 的抽象层从而使布局属性的创建简单化。你可以在一个主 UIStackView 中嵌套 UIStackView 从而让视图精确放置到相应的位置。
 
 如果你做过 Android 开发，你会发现 UIStackView 概念跟 android 中最常用的布局控件 LinearLayout 非常相似，这些布局的想法其实都是从早期的 Java Swing 开发中借鉴过来并加以完善的。
 
@@ -152,7 +152,7 @@ Fill 型用来调整 subviews 的大小，同时结合 spacing 属性来确定 s
 
 - FillProportionally: subviews 将会根据自己的原始大小做适当的布局调整。
 
-Spacing 型指定了 subviews 在布局方向上的间距填充方式，当subviews 不满足布局条件或有不明确的的 auto-layout 设置时，该类型的值就会结合相应的压缩阻力（compression resistance） 来改变subviews 的大小。
+Spacing 型指定了 subviews 在布局方向上的间距填充方式，当subviews 不满足布局条件或有不明确的的 Auto Layout 设置时，该类型的值就会结合相应的压缩阻力（compression resistance） 来改变subviews 的大小。
 
 - EqualSpacing: subviews 等间距排列
 
