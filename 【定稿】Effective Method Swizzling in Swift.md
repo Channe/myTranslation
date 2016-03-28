@@ -20,9 +20,9 @@ description:
 
 示例程序可以从 [Github](https://github.com/uraimo/SwizzlingInSwift/) 上下载。
 
-Method Swizzling 在 Objective-C 和其他语言中是很有名的一个技术，该技术支持动态方法派发。
+Method Swizzling 在 Objective-C 或其他语言中是一种很有名的技术，用来支持动态方法派发。
 
-Method Swizzling 通过改变特定 selector（方法）与实际实现的映射，可以将一个方法的实现在 *runtime* 时替换成其它的方法实现。
+Method Swizzling 通过改变特定 selector（方法）与实际实现之间的映射，在 *runtime* 时将一个方法的实现替换成其它方法的实现。
 
 ![](https://www.uraimo.com/imgs/swizzling.png)
 
@@ -32,7 +32,7 @@ Method Swizzling 通过改变特定 selector（方法）与实际实现的映射
 
 Swift 关于方法派发是使用静态方法的，但有些情形可能需要用到 Method Swizzling。
 
-在 Swift 中使用 Method Swizzling 之前，让我再次重申一下这种技术还是尽量少用，只有当你的问题不能用 swift 的方式解决，也不能用子类、协议或扩展解决时才使用。
+在 Swift 中使用 Method Swizzling 之前，让我再次重申一下这种技术还是尽量少用，**只有当你的问题不能用 Swift 的方式解决，也不能用子类、协议或扩展解决时才使用**。
 
 正如 NSHipster 上[另一篇文章](http://nshipster.com/swift-objc-runtime/)描述的那样，在 Swift 中对一个来自基本框架（Foundation、UIKit 等）的类使用 Method Swizzling 与 Objective-C 没什么区别。
 
@@ -86,15 +86,15 @@ extension UIViewController {
 
 加载一个类的定义时，会调用 `load` 方法，因此这地方适合执行 Method Swizzling 。
 
-但是 `load` 方法只在 Objective-C 里有，而且不能在 Swift 里重载，不敢怎么试都会报编译错误。接下来执行 swizzle 最好的地方就是 `initialize` 了，这是调用你的类中第一个方法前的地方。
+但是 `load` 方法只在 Objective-C 里有，而且不能在 Swift 里重载，不管怎么试都会报编译错误。接下来执行 swizzle 最好的地方就是 `initialize` 了，这是调用你的类中第一个方法前的地方。
 
 所有对修改方法执行的操作放在 `dispatch_once` 中,这是为了确保这个过程只执行一次。
 
 这些都是你要知道的关于继承自基本框架或  Objective-C 桥接类的。如果你要在纯 Swift 类中正确使用 Method Swizzling 的话，就需要将下面这些注意事项记在心上。
 
-## Swift 类中使用 Method Swizzling
+## Swift 自定义类中使用 Method Swizzling
 
-要在 Swift 类中使用 Method Swizzling 有两个必要条件：
+要在 Swift 自定义类中使用 Method Swizzling 有两个必要条件：
 
 * 包含 swizzle 方法的类需要继承自 NSObject
 
