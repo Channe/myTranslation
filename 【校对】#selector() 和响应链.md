@@ -2,12 +2,12 @@
 作者=Dominik Hauser
 原文日期=2016-04-10
 译者=Lanford3_3
-校对=TBD
-定稿=TBD
+校对=Channe
+定稿=
 
 ## #selector() 和响应链
 
-根据 Swift 2.2 中 selector 的新语法，我用在 “[在 Target-Action 中使用响应链](http://swift.gg/2016/01/06/utilize-the-responder-chain-for-target-action/)” 中的方法产生了一个警告，让我们来修正它。
+因为 Swift 2.2 中 selector 的新语法，我用在 “[在 Target-Action 中使用响应链](http://swift.gg/2016/01/06/utilize-the-responder-chain-for-target-action/)” 中的方法产生了一个警告，让我们来修正它。
 
 ### 总管协议
 
@@ -27,7 +27,7 @@ private extension Selector {
 }
 ```
 
-把 action 添加到响应链中就变得 so easy 了，就像这样：
+现在把 action 添加到响应链中就变得 so easy 了，就像这样：
 
 ```swift
 button.addTarget(nil, 
