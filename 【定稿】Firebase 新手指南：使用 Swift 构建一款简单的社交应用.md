@@ -1,7 +1,7 @@
 title: Firebase 新手指南：使用 Swift 构建一款简单的社交应用
-date: TODO
-tags: TODO
-categories: TODO
+date: 2016-05-12
+tags: [Swift 进阶]
+categories:  [AppCoda] 
 permalink: firebase
 
 ---
@@ -21,7 +21,7 @@ permalink: firebase
 
 <!--more-->
 
-Firebase 同时提供了基于加密 SSL 链接的用户授权认证服务。在认证方面，你可以选择邮箱和密码、Facebook、Twitter、Github、Google 和自定义这些组合来进行认证。
+Firebase 同时提供了基于加密 SSL 链接的用户授权认证服务。在认证方面，你可以选择邮箱和密码、Facebook、Twitter、Github、Google 或者自定义这些组合来进行认证。
 
 不仅仅是在 iOS 上，Firebase 还在 Android 和 JavaScript 平台上提供了 SDK。全平台共用一套实时数据库，Firebase 统一来管理数据，自动进行数据同步。
 
@@ -45,9 +45,9 @@ Firebase 同时提供了基于加密 SSL 链接的用户授权认证服务。在
 - 使用 UITableView 展示笑话、作者和点赞数
 - 对好笑话进行点赞
 
-接下来，让我们下载[初始工程](https://github.com/appcoda/FirebaseDemo/releases/download/v1.0/FirebaseJokesStarter.zip)。
+现在，让我们下载[初始工程](https://github.com/appcoda/FirebaseDemo/releases/download/v1.0/FirebaseJokesStarter.zip)。
 
-首先打开 Main.Storyboard，app 的总体框架如下：
+首先打开 Main.Storyboard，App 的总体框架如下：
 
 ![Main.Storyboard](http://www.appcoda.com/wp-content/uploads/2016/02/storyboard.png)
 
@@ -59,7 +59,7 @@ Firebase 同时提供了基于加密 SSL 链接的用户授权认证服务。在
 
 ![Firebase Homepage](http://www.appcoda.com/wp-content/uploads/2016/02/firebase.jpg)
 
-想了解 Firebase 究竟有哪些功能，我们只需要点击 My First App 中的 Manage App 按钮。这个新的页面就叫做 Firebase 控制台。它是一个非常酷的可视化调试工具，并且值得我们观看新手引导教程。新手引导教程会指引你如何创建键值对数据并且小加号按钮来创建子节点数据。这是不是很像 JSON 呢？通过点按左上角的 Dashboard 图标便可以退出新手引导教程。
+想了解 Firebase 究竟有哪些功能，我们只需要点击 My First App 中的 Manage App 按钮。这个新页面就是 Firebase 控制台（Firebase Forge）。它是一个非常酷的可视化调试工具，并且值得我们观看新手引导教程。教程会指引你如何创建键、值数据，甚至可以用加号按钮来创建子节点数据。这是不是很像 JSON 呢？通过点按左上角的 Dashboard 图标便可以退出新手引导教程。
 
 ### 创建应用程序
 
@@ -79,7 +79,7 @@ Firebase 同时提供了基于加密 SSL 链接的用户授权认证服务。在
 
 ![Forge Data](http://www.appcoda.com/wp-content/uploads/2016/02/forge_data.png)
 
-上图就是模拟了一下在控制中心创建笑话后的样子。我们不仅仅需要创建「笑话」，也需要创建「用户」，但其实两者都非常类似。时不时的回来看下控制台上的应用程序的数据变化是一个非常好的习惯。
+上图就是在控制中心创建一条笑话后的样子。我们不仅仅需要创建「笑话」，也需要创建「用户」，但其实两者都非常类似。时不时的回来看下控制台上的应用程序的数据变化是一个非常好的习惯。
 
 有一点我要指出的是 Firebase 上的数据都是以 JSON 对象的形式存储的。而 Parse 是采用表格的形式来存储的。当我们向 Firebase 的数据库中添加数据其实就是向现有 JSON 结构中添加一组键值对结构。刚刚我们创建的数据 JSON 结构如下：
 
@@ -180,7 +180,7 @@ class DataService {
 }
 ```
 
-导入 Firebase 框架后就可以使用 Firebase SDK 中的接口了。上面的 `DataService` 其实是一个和 Firebase 交互的服务类。为了能够读写数据，我们引用了 base url 来创建了一个 Firebase 的数据库。接下来，我们会将用户和笑话当做子节点来存储。获取这些子节点的内容，我们只要在 base url 后拼接上节点名称（例如，name）就可以访问了。为了让子节点操作更方便，我们也创建了对子节点的引用。
+导入 Firebase 框架后就可以使用 Firebase SDK 中的接口了。上面的 `DataService` 其实是一个和 Firebase 交互的服务类。为了能够读写数据，我们引用了 base url 来创建了一个 Firebase 的数据库。接下来，我们会将用户和笑话当做子节点来存储。获取这些子节点的内容，我们只要在 base url 后拼接上节点名称（例如 name）就可以访问了。为了让子节点操作更方便，我们也创建了对子节点的引用。
 
 > **注意：**创建一个数据库引用并不意味着就创建了一个 Firebase 服务的数据库连接。如果没有发起读和写的操作是无法获取数据的。
 
@@ -340,7 +340,7 @@ Firebase 默认支持用户邮箱和密码进行用户授权认证。`tryLogin()
 
 既然现在 app 已经完成了用户注册和登录功能，接下来我们就来看看如何对笑话数据进行处理。
 
-### 笑话模型
+### 笑话的数据模型
 
 什么是笑话？这个哲学问题我们可以以后再回答，或者看下 FirebaseJokes 上的一个笑话就会明白了。对我们而言，抽象出一个 Joke 数据模型更加重要。
 
