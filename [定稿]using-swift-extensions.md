@@ -11,8 +11,8 @@ description:
 作者=Natasha
 原文日期=2016-03-29
 译者=bestswifter
-校对=
-定稿=
+校对=shanksyang
+定稿=Channe
 
 <!--此处开始正文-->
 
@@ -28,7 +28,7 @@ description:
 
 在 Objective-C 中，我们有 .h 文件和 .m 文件。同时管理这两个文件（以及在工程中有双倍的文件）是一件很麻烦的事情，好在我们只要快速浏览 .h 文件就可以知道这个类对外暴露的 API，而内部的信息则被保存在 .m 文件中。在 Swift 中，我们只有一个文件。
 
-为了方便一眼就看出一个类的公有函数（可以被外部获取的函数），我把内部实现都写在一个私有的 extension 中，比如这样：
+为了一眼就看出一个 Swift 类的公开方法（可以被外部访问的方法），我把内部实现都写在一个私有的 extension 中，比如这样：
 
 ```swift
 // 这样可以一眼看出来，这个结构体中，那些部分可以被外部调用
@@ -129,9 +129,9 @@ private extension TodoItemViewModel {
 
 ### 分组
 
-我最初开始使用 extension 的真正原因是在 Swift 刚诞生时，我们无法使用 pragma 标记。是的，这就是我在 Swift 刚诞生时想做的第一件事。我使用 pragma 来分割 Objective-C 代码，所以当我开始写 Swift 代码时，我*需要*它。
+我最初开始使用 extension 的真正原因是在 Swift 刚诞生时，无法使用 pragma 标记（译注：Objective-C 中的 #pragma mark）。是的，这就是我在 Swift 刚诞生时想做的第一件事。我使用 pragma 来分割 Objective-C 代码，所以当我开始写 Swift 代码时，我**需要**它。
 
-所以我前往 WWDC 的 Swift 实验室并询问工程师如何在 Swift 中使用 pragma 标记。和我交流的那位工程师建议我[使用 extension 来替代 pragma 标记](http://stackoverflow.com/questions/24017316/pragma-mark-in-swift/24069206#24069206)。于是我就开始这么做了，并且立刻爱上了使用 extension。
+所以我在 WWDC Swift 实验室时询问苹果工程师如何在 Swift 中使用 pragma 标记。和我交流的那位工程师建议我[使用 extension 来替代 pragma 标记](http://stackoverflow.com/questions/24017316/pragma-mark-in-swift/24069206#24069206)。于是我就开始这么做了，并且立刻爱上了使用 extension。
 
 尽管 pragma 标记（Swift 中的 //MARK）很好用，但我们很容易忘记给一段新的代码加上 MARK 标记，尤其是你处在一个具有不同代码风格的小组中时。这往往会导致若干个无关函数被放在了同一个组中，或者某个函数处于错误的位置。所以如果有一组函数应该写在一起，我倾向于把他们放到一个 extension 中。
 
@@ -291,9 +291,9 @@ extension TodoListViewController: UITableViewDelegate {
 }
 ```
 
-### 模型
+### 模型（Model）
 
-这是一种我在使用 Objective-C 的 Core Data 时就喜欢采用的方法。由于模型发生变化时，Xcode 会生成相应的模型，所以函数和其他的东西都是写在 extension 或者 category 里面的。
+这是一种我在使用 Objective-C 操作 Core Data 时就喜欢采用的方法。由于模型发生变化时，Xcode 会生成相应的模型，所以函数和其他的东西都是写在 extension 或者 category 里面的。
 
 在 Swift 中，我尽可能多的尝试使用结构体，但我依然喜欢使用 extension 将 Model 的属性和基于属性的计算分割开来。这使 Model 的代码更容易阅读：
 
@@ -350,6 +350,6 @@ extension User {
 }
 ```
 
-### 太长，勿读
+### 长话短说（TL;DR）
 
-尽管这些并非“传统”的的用法，但 Swift 中 extension 的简单使用，就可以让代码质量更高，更具可读性。
+尽管这些用法可能不那么“传统”，但 Swift 中 extension 的简单使用，可以让代码质量更高，更具可读性。
