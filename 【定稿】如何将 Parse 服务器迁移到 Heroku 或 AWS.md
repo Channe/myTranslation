@@ -11,17 +11,17 @@ permalink: parse-server-installation
 原文日期=2016-04-16
 译者=Crystal Sun
 校对=numbbbbb
-定稿=
+定稿=Channe
 
 <!--此处开始正文-->
 
-我之前写过这篇文章 [***migrating a parse database to a self-host MongoDB instance***](http://www.appcoda.com/parse-server-migration/)，在这次的春季辅导教程中，我们看一下如何将 parse 服务器迁移到 Heroku 和 Amazon Web Service。
+我之前写过这篇文章 [***Migrating a parse database to a self-host MongoDB instance***](http://www.appcoda.com/parse-server-migration/)，在这次的春季辅导教程中，我们看一下如何将 parse 服务器迁移到 Heroku 或 Amazon Web Service。
 
 对于还不了解 [Parse 之死](http://blog.parse.com/announcements/moving-on/)的人来说，这意味着服务器（处理数据、与数据库互动、发送接收请求等待）需要迁移到其他地方了。Parse，后端即服务（BaaS），为开发者提供服务器和数据库的服务。然而，Parse 已在一月份关闭，官方建议，在 2017 年 1 月 28 日彻底停止服务之前，请迁移 Parse 应用。Parse 官方建议你先迁移数据库，然后在迁移服务器。本教程假定你已经完成了数据库的迁移，正如我们在上篇教程[第一部分](http://www.appcoda.com/parse-server-migration/)中所做的。
 
 <!--more-->
 
-幸运的是，[parse-server](https://github.com/ParsePlatform/parse-server)（GitHub 项目，由 Facebook 开源，伟大的 Parse 统治者）可以部署在大部分的云服务上。在本节教程里，我们会讲述如何将 parse-serve 部署到 Heroku，Salesforce 旗下知名的云服务供应商。在本篇文章的最后部分，我们会演示如何部署到 Amazon Web Services（AWS）上，世界上很多知名的 App 都在使用 AWS 的服务。
+幸运的是，[parse-server](https://github.com/ParsePlatform/parse-server)（GitHub 项目，由 Facebook 开源，『伟大的』 Parse 统治者）可以部署在大部分的云服务上。在本节教程里，我们会讲述如何将 parse-server 部署到Salesforce 旗下知名的云服务供应商 Heroku。在本篇文章的最后部分，我们会演示如何部署到 Amazon Web Services（AWS）上，世界上很多知名的 App 都在使用 AWS 的服务。
 
 ## 准备开始
 
@@ -37,7 +37,7 @@ permalink: parse-server-installation
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/03/Screen-Shot-2016-03-28-at-8.25.45-PM-1024x554.png)
 
-设置向导出现，让你输入应用名称（全部小写不允许有空格）。
+设置向导出现，让你输入应用名称（全部小写且不允许有空格）。
 
 接下来，选择 runtime 选项。如果你住在美国，选择 United States（美国），其他地方，选择 Europe（欧洲）。runtime 选项，就是你希望你的应用部署在哪个地方。考虑到性能和速度，最好将应用服务器部署在离你较近的地方。
 
@@ -204,7 +204,7 @@ Parse.initializeWithConfiguration(config);
 
  > 注意：如果你已经将 parse-server 部署到了 Heroku 上，那么就不需要再部署到 AWS 上了，毕竟你的服务器只能使用一个云服务。这部分主要是用来参考。如果你不想使用 Heroku，想使用 AWS，可以继续阅读下面的章节。我会假设你已经阅读过上面 Heroku 部分的教程内容，如果出现同样的设置内容，我不会赘述。
  
-Amazon Web Services（AWS）是全球知名的云服务提供商，为科技界许多知名的大型公司提供云服务。实际上，很大大型科技公司都在使用 AWS 的服务，例如苹果公司的 iCloud，Hulu，AirBnb，Lyft，Adobe，Slack （这些都是国外知名的科技公司）等等，这些只是使用 AWS 云存储服务的众多公司中一小部分。
+Amazon Web Services（AWS）是全球知名的云服务提供商，为科技界许多知名的大型公司提供云服务。实际上，很多大型科技公司都在使用 AWS 的服务，例如苹果公司的 iCloud，Hulu，AirBnb，Lyft，Adobe，Slack （这些都是国外知名的科技公司）等等，这些只是使用 AWS 云存储服务的众多公司中一小部分。
 
 那么，为什么我先介绍 Heroku 呢？不同于 AWS 的是，Heroku 更容易设置。对于大部分的设置，你可以直接进行无需输入账单信息。AWS 则不一样，设置方法比较复杂。为了演示如何部署到 AWS 上，我们将使用另外一个部署按钮和设置向导，来让所有的工作简单流畅。
 
@@ -235,7 +235,7 @@ Amazon Web Services（AWS）是全球知名的云服务提供商，为科技界�
 
 现在，点击 upload and deploy 按钮，完成最后一步。不出意外应用已经正确设置在 AWS 上了。
 
-当年设置 iOS 应用时，确保你已经定位了 AWS 的 URL，可以在 elastic beanstalk 里找到（如下图）。
+当你设置 iOS 应用时，确保你已经定位了 AWS 的 URL，可以在 elastic beanstalk 里找到（如下图）。
 
 ![](http://www.appcoda.com/wp-content/uploads/2016/03/OjyvPdc-1024x144.png)
 
@@ -245,6 +245,6 @@ Amazon Web Services（AWS）是全球知名的云服务提供商，为科技界�
 
 在本节教程中，我们深入了解了部署 parse 服务器的过程，估计现在你对部署过程已经掌握的比较牢固了。
 
-注意，有些细节本文没有讨论。如果你使用的是云代码，你可能需要做一些改动才能正常运行。另外，你可能还需要一个 Parse dashboard 的替代品。幸运的是，Parse 团队已经将 [dashboard 开源了](http://blog.parse.com/announcements/introducing-the-parse-server-dashboard/)，并提供了详尽的云代码更新指南。在之后的教程中，我们会详细讨论这些内容。不过现在，你首先要将应用部署到 AWS 或 Heroku 上！
+注意，有些细节本文没有讨论。如果你使用的是云代码，你可能需要做一些改动才能正常运行。另外，你可能还需要一个 Parse dashboard 的替代品。幸运的是，Parse 团队已经将 [dashboard 开源了](http://blog.parse.com/announcements/introducing-the-parse-server-dashboard/)，并提供了详尽的云代码更新指南。在之后的教程中，我们会详细讨论这些内容。不过现在，你首先要将应用部署到 Heroku 或 AWS 上！
 
 你觉得本教程怎么样？请留下评论，分享你的想法。
