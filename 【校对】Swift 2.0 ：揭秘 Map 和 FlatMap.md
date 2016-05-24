@@ -39,17 +39,16 @@ Swift 依然是一个有些不稳定的语言，每次发布新版本，都带�
 
 ## Map
 
-在这两个 map 方法中， Map 有着更清晰的行为，类似 flatMap ，它简单的对输入执行一个闭包，它可以用在 [Optionals](http://swiftdoc.org/v2.0/type/Optional/) 和 [SequenceTypes](http://swiftdoc.org/v2.0/protocol/SequenceType/) 中（比如，数组、词典等等）。
+map 和 flatmap 方法中， Map 有着更清晰的行为，它简单的对输入执行一个闭包，和 flatMap 一样，它可以用在 [Optionals](http://swiftdoc.org/v2.0/type/Optional/) 和 [SequenceTypes](http://swiftdoc.org/v2.0/protocol/SequenceType/) 上（如：数组、词典等）。
 
 ### 在 Optionals 上使用 Map
 
-对于 Optionals ，这个是 map 方法的原型：
+对于 Optionals ，下面是 map 方法的原型：
 
 ```swift
 public enum Optional<Wrapped> : ... {
 	...
     /*
-		If `self == nil`, returns `nil`.  Otherwise, returns `f(self!)`.
 		如果 `self == nil` ，直接返回 `nil` 。否则返回 `f(self!)` 。
 	*/
     public func map<U>(f: (Wrapped) throws -> U) rethrows -> U?
@@ -57,11 +56,7 @@ public enum Optional<Wrapped> : ... {
 }
 ```
 
-The map function expects a closure with signature (Wrapped) -> U, 
-if the optional has a value applies the function to the unwrapped optional and then wraps the result in an optional to return it 
-(an additional declaration is present for implicitly unwrapped optionals, but this does not introduce any difference in behavior, just be aware of it when map doesn’t actually return an optional).
-
-这个 map 方法闭包的签名是 `(Wrapped) -> U` ，如果这个可选值有值，那就解包并执行这个函数，之后再用一个可选值包裹这个结果并返回这个可选值（言外之意是指这是一个隐式可选解包，但这并没有什么不同的行为，只是要知道 map 并没有真的返回一个可选值）。
+这个 map 方法期望签名为 `(Wrapped) -> U`的闭包 ，如果这个可选值有值，那就解包并执行这个函数，之后再用一个可选值包裹这个结果并返回这个可选值（言外之意是指这是一个隐式可选解包，但这并没有什么不同的行为，只是要知道 map 并没有真的返回一个可选值）。
 
 注意到输出类型可以和输入类型不同，这就带来了大量有用的特性。
 
