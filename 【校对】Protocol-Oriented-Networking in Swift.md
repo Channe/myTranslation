@@ -1,4 +1,4 @@
-title: "Swift：面向协议的网络请求"
+title: "用 Swift 编写面向协议的网络请求"
 date: 
 tags: 
 categories: 
@@ -13,19 +13,20 @@ description: 这里是网页描述
 作者=Natasha The Robot
 原文日期=2016/05/12
 译者=saitjr
-校对=
+校对=Channe
 定稿=
 发布时间=
 
 <!--此处开始正文-->
 
-快来参加 9.1 ~ 9.2 在纽约举行的[Swift 社区狂欢节](http://www.tryswiftnyc.com/)吧 🎉 。使用优惠码 **NATASHATHEROBOT** 可获得 $100 折扣。
+*[和我一起参加](http://www.tryswiftnyc.com)9 月 1 日 - 9月 2 日在纽约举办的 Swift 社区庆典🎉吧！使用优惠码 NATASHATHEROBOT 可以获得 $100 的折扣！*
 
-最近我做了一个[面向协议编程实用技巧](http://www.slideshare.net/natashatherobot/practial-protocolorientedprogramming)（Practical Protocol-Oriented-Programming，POP）的访谈。视频还在制作中。与此同时，我写了这篇文字版的 POP Networking 作为续集。
+我最近做了个 Swift [面向协议编程实践](http://www.slideshare.net/natashatherobot/practial-protocolorientedprogramming)（POP💥） 的演讲。视频还在处理中。另一方面，这是演讲中 POP 视图部分的文本记录，供我和其他任何人作参考！
+
 
 ## 普通的配置方式
 
-假设我们要做一款展示全球美食图片和信息的 app。这需要从 API 上拉取数据，那么，用一个对象来做网络请求也就是理所当然的了：
+假设我们要做一款展示全球美食图片和信息的 App。这需要从 API 上拉取数据，那么，用一个对象来做网络请求也就是理所当然的了：
 
 ```swift
 struct FoodService {
@@ -46,7 +47,7 @@ enum Result<T> {
 }
 ```
 
-当 API 请求成功，回调便会返回 `Success` 状态与能正确解析的数据 —— 在当前 `FoodService` 例子中，成功的状态包含着美食信息数组。如果请求失败，会返回 `Failure` 状态，并包含错误信息（如 400）。
+当 API 请求成功，回调便会获得 `Success` 状态与能正确解析的数据 —— 在当前 `FoodService` 例子中，成功的状态包含着美食信息数组。如果请求失败，会返回 `Failure` 状态，并包含错误信息（如 400）。
 
 `FoodService` 的 `get` 方法（发起 API 请求）通常会在 ViewController 中调用，ViewController 来决定请求成功失败后具体的操作逻辑：
 
@@ -65,7 +66,7 @@ override func viewDidLoad() {
 }
  
 private func getFood() {
-    // 调用 get 方法
+    // 在这里调用 get() 方法
     FoodService().get() { [weak self] result in
         switch result {
         case .Success(let food):
@@ -81,17 +82,17 @@ private func getFood() {
 
 ## 有什么问题
 
-ViewController 的 `getFood()` 方法的问题是：ViewController 太过依赖这个方法了。如果没有正确的发起 API 请求或者请求结果（无论 `Success` 还是 `Failure`）没有正确的处理，那么界面上就没有任何数据显示。
+关于 ViewController 中 `getFood()` 方法的问题是：ViewController 太过依赖这个方法了。如果没有正确的发起 API 请求或者请求结果（无论 `Success` 还是 `Failure`）没有正确的处理，那么界面上就没有任何数据显示。
 
-为了确保这个方法没问题，给它写测试显得尤为重要（如果实习生或者以后你自己一不小心改了什么，那界面上就啥都显示不出来了）。是的，View Controller Tests 😱！
+为了确保这个方法没问题，给它写测试显得尤为重要（如果实习生或者你自己以后一不小心改了什么，那界面上就啥都显示不出来了）。是的，View Controller Tests 😱！
 
 说实话，它没那么麻烦。这有一个[黑魔法](https://www.natashatherobot.com/ios-testing-view-controllers-swift/)来配置 View Controller 测试。
 
-OK，现在已经准备好进行测试了，下一步要做什么？
+OK，现在已经准备好进行 View Controller 测试了，下一步要做什么？！
 
 ## 依赖注入
 
-为正确测试 ViewController 的 `getFood()` 方法，我们需要注入 `FoodService`（依赖），而不是直接调用这个方法！
+为了正确地测试 ViewController 中 `getFood()` 方法，我们需要注入 `FoodService`（依赖），而不是直接调用这个方法！
 
 ```swift
 // FoodLaLaViewController
@@ -132,7 +133,7 @@ func testFetchFood() {
 
 ## 绝杀 —— 协议
 
-目前的 `FoodService` 结构体是这样的：
+目前 `FoodService` 的结构体是这样：
 
 ```swift
 struct FoodService {
@@ -144,11 +145,11 @@ struct FoodService {
 }
 ```
 
-为了测试，我们需要通过重写 `get` 方法，来控制哪个 Result（`Success` 或 `Failure`）传给 ViewController，之后可以测试 ViewController 是如何处理这两种结果的。
+为了方便测试，我们需要能够重写 `get` 方法，来控制哪个 Result（`Success` 或 `Failure`）传给 ViewController，之后就可以测试 ViewController 是如何处理这两种结果。
 
 因为 `FoodService` 是结构体类型，所以不能对其子类化。但是，你猜怎样，我们可以使用协议来达到重写目的。
 
-我们可以将功能性的代码单独提出来：
+我们可以将功能性代码单独提到一个协议中：
 
 ```swift
 protocol Gettable {
@@ -158,7 +159,7 @@ protocol Gettable {
 }
 ```
 
-注意这里的标明的引用类型（associated type）。这个协议会用在所有的 service 结构体上，现在我们只让 `FoodService` 去遵循，但是以后还会有 `CakeService` 或者 `DonutService` 去遵循。使用这个协议，就可以统一所有 service 了。
+注意这里标明了引用类型（associated type）。这个协议将会用在所有的 service 结构体上，现在我们只让 `FoodService` 去遵循，但是以后还会有 `CakeService` 或者 `DonutService` 去遵循。通过使用这个通用性的协议，就可以在 App 中非常完美的统一所有 service 了。
 
 现在，唯一需要改变的就是 `FoodService` —— 让它遵循 `Gettable` 协议：
 
@@ -224,7 +225,7 @@ class Fake_FoodService: Gettable {
 }
 ```
 
-所以，我们可以注入 `Fake_FoodService` 来测试 ViewController 的确发起了请求，并正确的返回了 `[Food]` 类型的结果（定义为 `[Food]` 是因为 TableView 的 data source 所要用到的类型就是 `[Food]`）：
+所以，我们可以注入 `Fake_FoodService` 来测试 ViewController 的确发起了请求，并正确的返回了 `[Food]` 类型的结果（**定义为 `[Food]` 是因为 TableView 的 data source 所要用到的类型就是 `[Food]`**）：
 
 ```swift
 // FoodLaLaViewControllerTests
@@ -243,6 +244,6 @@ func testFetchFood_Success() {
 
 ## 总结
 
-使用协议来封装网络层，可以使代码 **更工整**， **更易注入**， **更易测试**， **更易阅读**。
+使用协议来封装网络层，可以使代码**统一**、 **可注入**、 **可测试**、**更可读**。
 
 POP 万岁！
