@@ -2,7 +2,7 @@ title: "使用 Swift 在 iOS 10 中集成 Siri —— SiriKit 教程（Part 1）
 date: 
 tags: 
 categories: []
-permalink: 
+permalink: adding-siri-to-ios-10-apps-in-swift-tutorial
 
 ---
 
@@ -11,13 +11,13 @@ permalink:
 原文日期=2016-06-14
 译者=Crystal Sun
 校对=Cee
-定稿=
+定稿=Channe
 
 <!--此处开始正文-->
 
-*这篇教程写于 2016 年 6 月 13 日，使用 Xcode 8 Beta 1 和 Swift 3.0 toolchain（工具链）。*
+**这篇教程写于 2016 年 6 月 13 日，使用 Xcode 8 Beta 1 和 Swift 3.0 toolchain（工具链）。**
 
-### *下载 Xcode 8，配置 iOS 10 和 Swift 3*
+### 下载 Xcode 8，配置 iOS 10 和 Swift 3
 
 如果你还没有下载 Xcode 8 Beta 1，请到[这里](https://developer.apple.com/download/)下载。
 
